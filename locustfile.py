@@ -1,3 +1,6 @@
+from operator import truediv
+from random import randint
+
 from locust import HttpUser, TaskSet, task, between
 
 class SimpleTasks(TaskSet):
@@ -30,3 +33,8 @@ class SimpleTasks(TaskSet):
 class SimpleUser(HttpUser):
     tasks = [SimpleTasks]
     wait_time = between(1, 5)  # Simulate a wait time between requests
+    weight = 1
+class HeavyUser(HttpUser):
+    tasks = [SimpleTasks]
+    wait_time = between(5, 10)  # Simulate a wait time between requests
+    weight = 1
